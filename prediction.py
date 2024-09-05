@@ -17,27 +17,34 @@ def display_prediction():
     # Dropdown for location selection
     location = st.selectbox('Select Location', list(models.keys()))
 
-    # Input fields for user
-    avgtemp_c = st.number_input('Average Temperature (°C)')
-    avghumidity =  st.number_input ('Humidity (%)')
-    age = st.number_input('Age (Days)')
-    feedintake = st.number_input('Feed Intake (gm/bird/day)')
+    # Input fields for user with validation
+    avgtemp_c = st.number_input('Average Temperature (°C)', min_value=-20, max_value=50)
+    avghumidity = st.number_input('Humidity (%)', min_value=0, max_value=100)
+    age = st.number_input('Age (Days)', min_value=0)
+    feedintake = st.number_input('Feed Intake (gm/bird/day)', min_value=0)
 
     # Predict button
     if st.button('Predict Weight'):
-    # Create input DataFrame - make sure feature names match training data
-        input_data = pd.DataFrame({
-        'avgtemp_c': [avgtemp_c],
-        'avghumidity': [avghumidity],
-        'age': [age],  # Match the training data name
-        'feedintake': [feedintake]  # Match the training data name
-        })
+        try:
+            # Create input DataFrame - make sure feature names match training data
+            input_data = pd.DataFrame({
+                'avgtemp_c': [avgtemp_c],
+                'avghumidity': [avghumidity],
+                'age': [age],  
+                'feedintake': [feedintake]  
+            })
 
-        # Get the model for the selected location
-        model = models[location]
+            # Get the model for the selected location
+            model = models[location]
 
-        # Make prediction
-        prediction = model.predict(input_data)
+            # Make prediction
+            prediction = model.predict(input_data)
 
-        # Display prediction
-        st.success(f'Predicted Broiler Weight: {prediction[0]:.2f} grams')
+            # Display prediction with location context
+            st.success(f'Predicted Broiler Weight in {location}: {prediction[0]:.2f} grams')
+        except Exception as e:
+            st.error(f"An error occurred: {e}")
+
+# Run the app
+if __name__ == "__main__":
+    display_prediction()
