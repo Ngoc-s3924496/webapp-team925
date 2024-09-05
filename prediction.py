@@ -1,7 +1,9 @@
 import streamlit as st
 import pandas as pd
 import pickle
+import os
 
+print(os.getcwd())  
 # Load your XGBoost models (assuming you have them saved in separate files)
 models = {
     'Bago': pickle.load(open('xgboost_Bago_model.pkl', 'rb')),
