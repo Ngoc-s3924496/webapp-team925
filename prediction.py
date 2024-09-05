@@ -6,11 +6,11 @@ import os
 print(os.getcwd())  
 # Load your XGBoost models (assuming you have them saved in separate files)
 models = {
-    'Bago': pickle.load(open('xgboost_Bago_model.pkl', 'rb')),
-    'Hmawbi': pickle.load(open('xgboost_Hmawbi_model.pkl', 'rb')),
-    'Kamase': pickle.load(open('xgboost_Kamase_model.pkl', 'rb')),
-    'Mezali': pickle.load(open('xgboost_Mezali_model.pkl', 'rb')),
-    'Taungnyo': pickle.load(open('xgboost_Taungnyo_model.pkl', 'rb'))
+    'Bago': pickle.load(open('webapp-team925/xgboost_Bago_model.pkl', 'rb')), 
+    'Hmawbi': pickle.load(open('webapp-team925/xgboost_Hmawbi_model.pkl', 'rb')),
+    'Kamase': pickle.load(open('webapp-team925/xgboost_Kamase_model.pkl', 'rb')),
+    'Mezali': pickle.load(open('webapp-team925/xgboost_Mezali_model.pkl', 'rb')),
+    'Taungnyo': pickle.load(open('webapp-team925/xgboost_Taungnyo_model.pkl', 'rb'))
 }
 
 def display_prediction():
